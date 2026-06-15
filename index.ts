@@ -10,7 +10,7 @@ const table = new aws.dynamodb.Table("users", {
     attributes: [{ name: "userId", type: "S" }],
 });
 
-// Custom dynamic resource: uses the AWS SDK directly via AWS_ENDPOINT_URL.
+// Custom dynamic resource: reads ministack:endpoint from stack config via pulumi.getConfig().
 const dbPassword = new ManagedSecret("db-password", {
     name: "db-password",
     length: 32,

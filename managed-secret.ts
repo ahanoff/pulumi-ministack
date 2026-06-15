@@ -42,11 +42,15 @@ interface ManagedSecretInputs extends PasswordPolicy {
 // --- Provider ---
 
 function getClient(): SecretsManagerClient {
-    // AWS SDK v3.362.0+ reads AWS_ENDPOINT_URL automatically.
-    // Passing it explicitly also works and supports older SDK versions.
-    return new SecretsManagerClient({
-        endpoint: process.env.AWS_ENDPOINT_URL,
-    });
+    // Dynamic resource providers run in the same process as the Pulumi program,
+    // so pulumi.getConfig() reads the same Pulumi.<stack>.yaml file.
+    let endpoint: string | undefined;
+    try {
+        endpoint = pulumi.getConfig("ministack:endpoint");
+    } catch {
+        // Production stacks have no ministack:endpoint, SDK uses real AWS.
+    }
+    return new SecretsManagerClient({ endpoint });
 }
 
 class ManagedSecretProvider implements pulumi.dynamic.ResourceProvider {

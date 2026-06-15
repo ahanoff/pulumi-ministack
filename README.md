@@ -71,9 +71,9 @@ Enable it once after cloning:
 git config core.hooksPath .githooks
 ```
 
-## The two layers
+## How endpoints reach both code paths
 
-1. **`Pulumi.local.yaml`**: endpoint overrides for the native `@pulumi/aws` provider.
-2. **`AWS_ENDPOINT_URL`**: endpoint override for the AWS SDK used by custom resources.
+1. **`Pulumi.local.yaml`** (`aws:endpoints`): endpoint overrides for the native `@pulumi/aws` provider.
+2. **`Pulumi.local.yaml`** (`ministack:endpoint`): read by dynamic resource providers via `pulumi.getConfig()`.
 
-Both must point at MiniStack. The `Makefile` and CI workflow set both.
+Both come from the same file. No environment variables needed for endpoint configuration.

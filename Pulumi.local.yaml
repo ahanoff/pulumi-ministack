@@ -20,3 +20,5 @@ config:
       cloudwatch: http://localhost:4566
       ssm: http://localhost:4566
       kms: http://localhost:4566
+  # Read by dynamic resource providers via pulumi.getConfig()
+  ministack:endpoint: http://localhost:4566
