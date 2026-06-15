@@ -8,7 +8,7 @@ Sample codebase accompanying the blog post [Testing Pulumi stacks locally with M
 
 - [Podman](https://podman.io/getting-started/installation) (or [Docker](https://docs.docker.com/get-docker/))
 - [Pulumi CLI](https://www.pulumi.com/docs/install/)
-- Node.js 24
+- [Bun](https://bun.sh/)
 
 ## Quick start
 
@@ -24,7 +24,7 @@ podman run -p 4566:4566 ministackorg/ministack
 Install dependencies and run the stack:
 
 ```bash
-npm install
+bun install
 make init           # create the local stack (once)
 make local-preview   # dry run
 make local-up        # deploy against MiniStack

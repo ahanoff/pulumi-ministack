@@ -27,11 +27,9 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "24"
+      - uses: oven-sh/setup-bun@v2
 
-      - run: npm ci
+      - run: bun install
 
       - name: Pulumi Preview
         uses: pulumi/actions@v6
